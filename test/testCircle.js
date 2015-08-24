@@ -1,7 +1,7 @@
 var Circle, assert;
 
 assert = require('assert');
-Circle = require('../src/circle');
+Circle = require('../lib/circle');
 
 describe('circle', function() {
     it('checkAttributes does not throw exception for accepted attributes', function () {

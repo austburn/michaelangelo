@@ -1,7 +1,7 @@
 var Path, assert;
 
 assert = require('assert');
-Path = require('../src/path');
+Path = require('../lib/path');
 
 describe('path', function() {
     it('checkAttributes does not throw exception for accepted attributes', function () {

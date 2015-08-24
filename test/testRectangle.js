@@ -1,7 +1,7 @@
 var Rectangle, assert;
 
 assert = require('assert');
-Rectangle = require('../src/rectangle');
+Rectangle = require('../lib/rectangle');
 
 describe('rectangle', function() {
     it('checkAttributes does not throw exception for accepted attributes', function () {
