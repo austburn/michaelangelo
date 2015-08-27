@@ -3,7 +3,7 @@ var Path, assert;
 assert = require('assert');
 Path = require('../lib/path');
 
-describe('path', function() {
+describe('path', function () {
     it('checkAttributes does not throw exception for accepted attributes', function () {
         var path;
         path = new Path({x1: 0, y1: 0, x2: 1, y2: 1});

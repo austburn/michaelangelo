@@ -3,7 +3,7 @@ var Circle, assert;
 assert = require('assert');
 Circle = require('../lib/circle');
 
-describe('circle', function() {
+describe('circle', function () {
     it('checkAttributes does not throw exception for accepted attributes', function () {
         var circle;
         circle = new Circle({cx: 2, cy: 2, r: 3});

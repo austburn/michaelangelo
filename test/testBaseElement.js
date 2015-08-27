@@ -3,7 +3,7 @@ var BaseElement, assert;
 assert = require('assert');
 BaseElement = require('../lib/baseElement');
 
-describe('baseElement', function() {
+describe('baseElement', function () {
     it('adjustAttributes returns adjusted object', function () {
         var element, adjusted;
         element = new BaseElement({

@@ -3,7 +3,7 @@ var Arc, assert;
 assert = require('assert');
 Arc = require('../lib/arc');
 
-describe('arc', function() {
+describe('arc', function () {
     it('checkAttributes does not throw exception for accepted attributes', function () {
         var arc;
         arc = new Arc({x: 2, y: 2, width: 3, height: 1});

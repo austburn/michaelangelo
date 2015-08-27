@@ -3,7 +3,7 @@ var Rectangle, assert;
 assert = require('assert');
 Rectangle = require('../lib/rectangle');
 
-describe('rectangle', function() {
+describe('rectangle', function () {
     it('checkAttributes does not throw exception for accepted attributes', function () {
         var rect;
         rect = new Rectangle({x: 0, y: 0, width: 1, height: 2});

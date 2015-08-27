@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha test/",
     "build": "browserify src/michaelangelo.js --outfile index.js",
-    "lint": "jshint lib/ test/"
+    "lint": "jscs lib/ test/"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/austburn/michaelangelo",
   "devDependencies": {
     "assert": "^1.3.0",
-    "jshint": "^2.8.0",
+    "jscs": "^2.1.1",
     "mocha": "^2.2.5",
     "raphael": "^2.1.4"
   }

@@ -3,7 +3,7 @@ var Ellipse, assert;
 assert = require('assert');
 Ellipse = require('../lib/ellipse');
 
-describe('ellipse', function() {
+describe('ellipse', function () {
     it('checkAttributes does not throw exception for accepted attributes', function () {
         var ellipse;
         ellipse = new Ellipse({x: 2, y: 2, rx: 3, ry: 1});
