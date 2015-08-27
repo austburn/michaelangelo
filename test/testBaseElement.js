@@ -9,7 +9,7 @@ describe('baseElement', function() {
         element = new BaseElement({
             attribute: 5
         });
-        adjusted = element.adjustAttributes(2)
+        adjusted = element.adjustAttributes(2);
 
         assert.deepEqual(adjusted, {attribute: 10});
     });
