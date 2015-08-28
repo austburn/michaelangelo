@@ -8,89 +8,96 @@ describe('baseElement', function () {
         var element, adjusted;
         element = new BaseElement({
             attribute: 5
-        });
-        adjusted = element.adjustAttributes(2);
+        }, {ratio: 2});
+        adjusted = element.adjustAttributes();
 
         assert.deepEqual(adjusted, {attribute: 10});
     });
 
-    it('checkAttributes throws exception if type is not set', function () {
+    it('adjustAttributes adds default attributes', function () {
+        var element, adjusted;
+        element = new BaseElement({
+            attribute: 5
+        }, {ratio: 2});
+        element.defaultAttributes = {
+            attribute2: 7
+        };
+        adjusted = element.adjustAttributes();
+
+        assert.deepEqual(adjusted, {attribute: 10, attribute2: 14});
+    });
+
+    it('adjustAttributes respects passed in attribute', function () {
+        var element, adjusted;
+        element = new BaseElement({
+            attribute: 5,
+            attribute2: 9
+        }, {ratio: 2});
+        element.defaultAttributes = {
+            attribute2: 7
+        };
+        adjusted = element.adjustAttributes();
+
+        assert.deepEqual(adjusted, {attribute: 10, attribute2: 18});
+    });
+
+    it('validateAttributes throws exception if type is not set', function () {
         var element;
         element = new BaseElement({attribute: 'attribute1'});
 
         assert.throws(function () {
-            element.checkAttributes();
+            element.validateAttributes();
         }, /Must define a type\./);
     });
 
-    it('checkAttributes throws exception if there are invalid attributes', function () {
+    it('validateAttributes throws exception if attributes do not match', function () {
         var element;
         element = new BaseElement({x: 0, y: 0, bad: 1});
         element.type = 'element';
         element.elementKeys = ['x', 'y', 'width'];
 
         assert.throws(function () {
-            element.checkAttributes();
-        }, /Element did not contain expected attributes\./);
-    });
-
-    it('checkAttributes throws exception if there are invalid attributes', function () {
-        var element;
-        element = new BaseElement({x: 0, y: 0, bad: 1});
-        element.type = 'element';
-        element.elementKeys = ['x', 'y'];
-
-        assert.throws(function () {
-            element.checkAttributes();
+            element.validateAttributes();
         }, /Unexpected attribute: \'bad\'\./);
     });
 
-    it('checkAttributes allows optional attributes', function () {
+    it('validateAttributes allows required attributes without optional attributes', function () {
+        var element;
+        element = new BaseElement({x: 0, y: 0});
+        element.type = 'element';
+        element.elementKeys = ['x', 'y'];
+        element.defaultAttributes = {'height': 'default'};
+
+        assert.doesNotThrow(function () {
+            element.validateAttributes();
+        });
+    });
+
+    it('validateAttributes allows optional attributes', function () {
         var element;
         element = new BaseElement({x: 0, y: 0, height: 1});
         element.type = 'element';
         element.elementKeys = ['x', 'y'];
-        element.optionalKeys = ['height'];
+        element.defaultAttributes = {'height': 'default'};
 
         assert.doesNotThrow(function () {
-            element.checkAttributes();
+            element.validateAttributes();
         });
     });
 
-    it('checkAttributes allows one of many optional attributes', function () {
-        var element;
-        element = new BaseElement({x: 0, y: 0, height: 1});
+    it('toRaphaelObject', function () {
+        var element, raphaelObj;
+        element = new BaseElement({x: 0, y: 0, width: 1});
         element.type = 'element';
-        element.elementKeys = ['x', 'y'];
-        element.optionalKeys = ['height', 'width', 'z'];
+        element.elementKeys = ['x', 'y', 'width'];
+        raphaelObj = element.toRaphaelObject();
 
-        assert.doesNotThrow(function () {
-            element.checkAttributes();
+        assert.deepEqual(raphaelObj, {
+            type: 'element',
+            x: 0,
+            y: 0,
+            width: 1
         });
-    });
-
-    it('checkAttributes does not allow excessive optional attributes', function () {
-        var element;
-        element = new BaseElement({x: 0, y: 0, height: 1, width: 4});
-        element.type = 'element';
-        element.elementKeys = ['x', 'y'];
-        element.optionalKeys = ['height'];
-
-        assert.throws(function () {
-            element.checkAttributes();
-        }, /Unexpected attribute: \'width\'\./);
-    });
-
-    it('checkAttributes does not allow excessive optional attributes', function () {
-        var element;
-        element = new BaseElement({x: 0, y: 0, height: 1, width: 4});
-        element.type = 'element';
-        element.elementKeys = ['x', 'y'];
-        element.optionalKeys = ['height', 'angle1', 'angle2'];
-
-        assert.throws(function () {
-            element.checkAttributes();
-        }, /Unexpected attribute: \'width\'\./);
     });
 
     it('toRaphaelObject adds options', function () {
@@ -146,12 +153,12 @@ describe('baseElement', function () {
         });
     });
 
-    it('toRaphaelObject adds optional attributes', function () {
+    it('toRaphaelObject respects optional attributes', function () {
         var element, raphaelObj;
         element = new BaseElement({x: 0, y: 0, width: 1, height: 3}, {'stroke-width': 2});
         element.type = 'element';
         element.elementKeys = ['x', 'y', 'width'];
-        element.optionalKeys = ['height'];
+        element.defaultAttributes = {'height': 0};
         raphaelObj = element.toRaphaelObject();
 
         assert.deepEqual(raphaelObj, {
@@ -160,6 +167,24 @@ describe('baseElement', function () {
             y: 0,
             width: 1,
             height: 3,
+            'stroke-width': 2
+        });
+    });
+
+    it('toRaphaelObject adds default attributes', function () {
+        var element, raphaelObj;
+        element = new BaseElement({x: 0, y: 0, width: 1}, {'stroke-width': 2});
+        element.type = 'element';
+        element.elementKeys = ['x', 'y', 'width'];
+        element.defaultAttributes = {'height': 0};
+        raphaelObj = element.toRaphaelObject();
+
+        assert.deepEqual(raphaelObj, {
+            type: 'element',
+            x: 0,
+            y: 0,
+            width: 1,
+            height: 0,
             'stroke-width': 2
         });
     });

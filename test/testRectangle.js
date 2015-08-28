@@ -4,11 +4,11 @@ assert = require('assert');
 Rectangle = require('../lib/rectangle');
 
 describe('rectangle', function () {
-    it('checkAttributes does not throw exception for accepted attributes', function () {
+    it('validateAttributes does not throw exception for accepted attributes', function () {
         var rect;
         rect = new Rectangle({x: 0, y: 0, width: 1, height: 2});
         assert.doesNotThrow(function () {
-            rect.checkAttributes();
+            rect.validateAttributes();
         });
     });
 

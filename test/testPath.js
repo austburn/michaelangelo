@@ -4,11 +4,11 @@ assert = require('assert');
 Path = require('../lib/path');
 
 describe('path', function () {
-    it('checkAttributes does not throw exception for accepted attributes', function () {
+    it('validateAttributes does not throw exception for accepted attributes', function () {
         var path;
         path = new Path({x1: 0, y1: 0, x2: 1, y2: 1});
         assert.doesNotThrow(function () {
-            path.checkAttributes();
+            path.validateAttributes();
         });
     });
 
