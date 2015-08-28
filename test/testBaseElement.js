@@ -153,6 +153,31 @@ describe('baseElement', function () {
         });
     });
 
+    it('transformRaphaelObject has access to default attributes', function () {
+        var element, raphaelObj;
+        element = new BaseElement({x: 1, y: 2, width: 3}, {ratio: 2, 'stroke-width': 2});
+        element.type = 'element';
+        element.elementKeys = ['x', 'y', 'width'];
+        element.defaultAttributes = {
+            height: 7
+        };
+        element.transformRaphaelObject = function (obj) {
+            obj.height = obj.height/2;
+            return obj;
+        };
+
+        raphaelObj = element.toRaphaelObject();
+
+        assert.deepEqual(raphaelObj, {
+            type: 'element',
+            x: 2,
+            y: 4,
+            width: 6,
+            height: 7,
+            'stroke-width': 2
+        });
+    });
+
     it('toRaphaelObject respects optional attributes', function () {
         var element, raphaelObj;
         element = new BaseElement({x: 0, y: 0, width: 1, height: 3}, {'stroke-width': 2});
