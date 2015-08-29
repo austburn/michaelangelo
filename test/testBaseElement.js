@@ -162,7 +162,7 @@ describe('baseElement', function () {
             height: 7
         };
         element.transformRaphaelObject = function (obj) {
-            obj.height = obj.height/2;
+            obj.height = obj.height / 2;
             return obj;
         };
 
