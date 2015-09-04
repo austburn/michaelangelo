@@ -1,7 +1,7 @@
 {
   "name": "michaelangelo",
   "email": "austburn@gmail.com",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A lightweight wrapper for RaphaelJS.",
   "main": "index.js",
   "scripts": {

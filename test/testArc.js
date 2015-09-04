@@ -7,7 +7,7 @@ Arc = require('../lib/arc');
 describe('arc', function () {
     it('validateAttributes does not throw exception for accepted attributes', function () {
         var arc;
-        arc = new Arc({x: 2, y: 2, width: 3, height: 1});
+        arc = new Arc({cx: 2, cy: 2, width: 3, height: 1});
         assert.doesNotThrow(function () {
             arc.validateAttributes();
         });
@@ -15,7 +15,7 @@ describe('arc', function () {
 
     it('toRaphaelObject adds type and calculates path', function () {
         var arc, raphaelObj;
-        arc = new Arc({x: 2, y: 2, width: 2, height: 2});
+        arc = new Arc({cx: 2, cy: 2, width: 2, height: 2});
 
         arc.calculatePointOnEclipse = sinon.stub();
         arc.calculatePointOnEclipse.onFirstCall().returns({x: 1, y: 2});
