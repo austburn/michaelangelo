@@ -8,7 +8,7 @@ describe('baseElement', function () {
         var element, adjusted;
         element = new BaseElement({
             attribute: 5
-        }, {ratio: 2});
+        }, {scale: 2});
         adjusted = element.adjustAttributes();
 
         assert.deepEqual(adjusted, {attribute: 10});
@@ -18,7 +18,7 @@ describe('baseElement', function () {
         var element, adjusted;
         element = new BaseElement({
             attribute: 5
-        }, {ratio: 2});
+        }, {scale: 2});
         element.defaultAttributes = {
             attribute2: 7
         };
@@ -32,7 +32,7 @@ describe('baseElement', function () {
         element = new BaseElement({
             attribute: 5,
             attribute2: 9
-        }, {ratio: 2});
+        }, {scale: 2});
         element.defaultAttributes = {
             attribute2: 7
         };
@@ -118,7 +118,7 @@ describe('baseElement', function () {
 
     it('toRaphaelObject adjusts and adds options', function () {
         var element, raphaelObj;
-        element = new BaseElement({x: 1, y: 2, width: 3}, {ratio: 2, 'stroke-width': 2});
+        element = new BaseElement({x: 1, y: 2, width: 3}, {scale: 2, 'stroke-width': 2});
         element.type = 'element';
         element.elementKeys = ['x', 'y', 'width'];
         raphaelObj = element.toRaphaelObject();
@@ -134,7 +134,7 @@ describe('baseElement', function () {
 
     it('transformRaphaelObject is called', function () {
         var element, raphaelObj;
-        element = new BaseElement({x: 1, y: 2, width: 3}, {ratio: 2, 'stroke-width': 2});
+        element = new BaseElement({x: 1, y: 2, width: 3}, {scale: 2, 'stroke-width': 2});
         element.type = 'element';
         element.elementKeys = ['x', 'y', 'width'];
         element.transformRaphaelObject = function (obj) {
@@ -155,7 +155,7 @@ describe('baseElement', function () {
 
     it('transformRaphaelObject has access to default attributes', function () {
         var element, raphaelObj;
-        element = new BaseElement({x: 1, y: 2, width: 3}, {ratio: 2, 'stroke-width': 2});
+        element = new BaseElement({x: 1, y: 2, width: 3}, {scale: 2, 'stroke-width': 2});
         element.type = 'element';
         element.elementKeys = ['x', 'y', 'width'];
         element.defaultAttributes = {

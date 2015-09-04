@@ -5,8 +5,7 @@
   "description": "A lightweight wrapper for RaphaelJS.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/",
-    "build": "browserify src/michaelangelo.js --outfile index.js",
+    "test": "npm run lint && mocha test/",
     "lint": "jscs lib/ test/"
   },
   "repository": {
