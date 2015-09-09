@@ -1,27 +1,28 @@
+/* global describe, it*/
 var Rectangle, assert;
 
 assert = require('assert');
 Rectangle = require('../lib/rectangle');
 
 describe('rectangle', function () {
-    it('validateAttributes does not throw exception for accepted attributes', function () {
-        var rect;
-        rect = new Rectangle({x: 0, y: 0, width: 1, height: 2});
-        assert.doesNotThrow(function () {
-            rect.validateAttributes();
-        });
+  it('validateAttributes does not throw exception for accepted attributes', function () {
+    var rect;
+    rect = new Rectangle({x: 0, y: 0, width: 1, height: 2});
+    assert.doesNotThrow(function () {
+      rect.validateAttributes();
     });
+  });
 
-    it('toRaphaelObject adds type', function () {
-        var rect, raphaelObj;
-        rect = new Rectangle({x: 0, y: 0, width: 1, height: 2});
-        raphaelObj = rect.toRaphaelObject();
-        assert.deepEqual(raphaelObj, {
-            type: 'rect',
-            x: 0,
-            y: 0,
-            width: 1,
-            height: 2
-        });
+  it('toRaphaelObject adds type', function () {
+    var rect, raphaelObj;
+    rect = new Rectangle({x: 0, y: 0, width: 1, height: 2});
+    raphaelObj = rect.toRaphaelObject();
+    assert.deepEqual(raphaelObj, {
+      type: 'rect',
+      x: 0,
+      y: 0,
+      width: 1,
+      height: 2
     });
+  });
 });
