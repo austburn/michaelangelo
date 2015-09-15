@@ -1,5 +1,7 @@
 # Michaelangelo
-Michaelangelo enables you to easily build out cross-browser vector graphics via [Raphael](https://github.com/DmitryBaranovskiy/raphael/) that was inspired by the Python module [matplotlib](https://github.com/matplotlib/matplotlib).
+Michaelangelo enables you to easily build vector graphics for structures you already have specifications for via [Raphael](https://github.com/DmitryBaranovskiy/raphael/) that was inspired by the Python module [matplotlib](https://github.com/matplotlib/matplotlib).
+
+I actually built Michaelangelo as a result of trying to draw an NBA court in Rapahel. The biggest problem I had was translating what I wanted into SVG. I was trying to build paths, arcs, and even normal objects. I spent too much time learning SVG and doing math that I knew I'd have to redo. I decided to shift gears and start building Michaelangelo to increase my productivity on my NBA project. After building a good portion of Michaelangelo, my code to construct an NBA court was reduced to around [10 lines](https://github.com/austburn/nba-js/blob/master/app/court/court.js#L20-L31).
 
 ## Using
 Currently, Michaelangelo provides abstractions some of the elements you can create in
