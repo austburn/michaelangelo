@@ -5,41 +5,41 @@ assert = require('assert');
 BaseElement = require('../lib/baseElement');
 
 describe('baseElement', function () {
-  it('adjustAttributes returns adjusted object', function () {
+  it('createDefaultObject returns new object', function () {
     var element, adjusted;
     element = new BaseElement({
       attribute: 5
-    }, {scale: 2});
-    adjusted = element.adjustAttributes();
+    });
+    adjusted = element.createDefaultObject();
 
-    assert.deepEqual(adjusted, {attribute: 10});
+    assert.deepEqual(adjusted, {attribute: 5});
   });
 
-  it('adjustAttributes adds default attributes', function () {
+  it('createDefaultObject adds default attributes', function () {
     var element, adjusted;
     element = new BaseElement({
       attribute: 5
-    }, {scale: 2});
+    });
     element.defaultAttributes = {
       attribute2: 7
     };
-    adjusted = element.adjustAttributes();
+    adjusted = element.createDefaultObject();
 
-    assert.deepEqual(adjusted, {attribute: 10, attribute2: 14});
+    assert.deepEqual(adjusted, {attribute: 5, attribute2: 7});
   });
 
-  it('adjustAttributes respects passed in attribute', function () {
+  it('createDefaultObject respects passed in attribute', function () {
     var element, adjusted;
     element = new BaseElement({
       attribute: 5,
       attribute2: 9
-    }, {scale: 2});
+    });
     element.defaultAttributes = {
       attribute2: 7
     };
-    adjusted = element.adjustAttributes();
+    adjusted = element.createDefaultObject();
 
-    assert.deepEqual(adjusted, {attribute: 10, attribute2: 18});
+    assert.deepEqual(adjusted, {attribute: 5, attribute2: 9});
   });
 
   it('validateAttributes throws exception if type is not set', function () {
@@ -117,25 +117,9 @@ describe('baseElement', function () {
     });
   });
 
-  it('toRaphaelObject adjusts and adds options', function () {
-    var element, raphaelObj;
-    element = new BaseElement({x: 1, y: 2, width: 3}, {scale: 2, 'stroke-width': 2});
-    element.type = 'element';
-    element.elementKeys = ['x', 'y', 'width'];
-    raphaelObj = element.toRaphaelObject();
-
-    assert.deepEqual(raphaelObj, {
-      type: 'element',
-      x: 2,
-      y: 4,
-      width: 6,
-      'stroke-width': 2
-    });
-  });
-
   it('transformRaphaelObject is called', function () {
     var element, raphaelObj;
-    element = new BaseElement({x: 1, y: 2, width: 3}, {scale: 2, 'stroke-width': 2});
+    element = new BaseElement({x: 1, y: 2, width: 3}, {'stroke-width': 2});
     element.type = 'element';
     element.elementKeys = ['x', 'y', 'width'];
     element.transformRaphaelObject = function (obj) {
@@ -147,20 +131,20 @@ describe('baseElement', function () {
 
     assert.deepEqual(raphaelObj, {
       type: 'iTransform',
-      x: 2,
-      y: 4,
-      width: 6,
+      x: 1,
+      y: 2,
+      width: 3,
       'stroke-width': 2
     });
   });
 
   it('transformRaphaelObject has access to default attributes', function () {
     var element, raphaelObj;
-    element = new BaseElement({x: 1, y: 2, width: 3}, {scale: 2, 'stroke-width': 2});
+    element = new BaseElement({x: 1, y: 2, width: 3}, {'stroke-width': 2});
     element.type = 'element';
     element.elementKeys = ['x', 'y', 'width'];
     element.defaultAttributes = {
-      height: 7
+      height: 8
     };
     element.transformRaphaelObject = function (obj) {
       obj.height = obj.height / 2;
@@ -171,10 +155,10 @@ describe('baseElement', function () {
 
     assert.deepEqual(raphaelObj, {
       type: 'element',
-      x: 2,
-      y: 4,
-      width: 6,
-      height: 7,
+      x: 1,
+      y: 2,
+      width: 3,
+      height: 4,
       'stroke-width': 2
     });
   });
