@@ -18,9 +18,9 @@ describe('arc', function () {
     var arc, raphaelObj;
     arc = new Arc({cx: 2, cy: 2, width: 2, height: 2});
 
-    arc.calculatePointOnEclipse = sinon.stub();
-    arc.calculatePointOnEclipse.onFirstCall().returns({x: 1, y: 2});
-    arc.calculatePointOnEclipse.onSecondCall().returns({x: 2, y: 3});
+    arc.calculatePointOnEllipse = sinon.stub();
+    arc.calculatePointOnEllipse.onFirstCall().returns({x: 1, y: 2});
+    arc.calculatePointOnEllipse.onSecondCall().returns({x: 2, y: 3});
 
     raphaelObj = arc.toRaphaelObject();
 
@@ -48,7 +48,7 @@ describe('arc', function () {
     it('calculates the point correctly when the start point is 0', function () {
       var point;
 
-      point = arc.calculatePointOnEclipse(2, 2, 1, 1, 0);
+      point = arc.calculatePointOnEllipse(2, 2, 1, 1, 0);
 
       assert.deepEqual(point, {x: 1, y: 2});
     });
@@ -56,7 +56,7 @@ describe('arc', function () {
     it('calculates the point correctly when the start point is 30', function () {
       var point;
 
-      point = arc.calculatePointOnEclipse(2, 2, 1, 1, 30);
+      point = arc.calculatePointOnEllipse(2, 2, 1, 1, 30);
 
       // cos(30) == 0.866025
       // sin(30) == 0.5
@@ -67,7 +67,7 @@ describe('arc', function () {
     it('calculates the point correctly when the start point is 45', function () {
       var point;
 
-      point = arc.calculatePointOnEclipse(2, 2, 1, 1, 45);
+      point = arc.calculatePointOnEllipse(2, 2, 1, 1, 45);
 
       // cos(45) == sin(45) == 0.7071
       assert.equal(point.x.toPrecision(5), 2 - 0.7071);
@@ -77,7 +77,7 @@ describe('arc', function () {
     it('calculates the point correctly when the start point is 60', function () {
       var point;
 
-      point = arc.calculatePointOnEclipse(2, 2, 1, 1, 60);
+      point = arc.calculatePointOnEllipse(2, 2, 1, 1, 60);
 
       // cos(45) == 0.5
       // sin(45) == 0.866025
