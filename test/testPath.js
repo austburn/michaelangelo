@@ -25,11 +25,11 @@ describe('path', function () {
 
   it('toRaphaelObject uses transformRaphaelObject and respects options', function () {
     var path, raphaelObj;
-    path = new Path({x1: 1, y1: 1, x2: 2, y2: 2}, {scale: 2, 'stroke-width': 2});
+    path = new Path({x1: 1, y1: 1, x2: 2, y2: 2}, {'stroke-width': 2});
     raphaelObj = path.toRaphaelObject();
     assert.deepEqual(raphaelObj, {
       type: 'path',
-      path: 'M2,2L4,4',
+      path: 'M1,1L2,2',
       'stroke-width': 2
     });
   });
